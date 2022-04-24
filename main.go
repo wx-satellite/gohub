@@ -1,14 +1,22 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
-	"net/http"
+	"gohub/bootstrap"
 )
 
 func main() {
-	r := gin.Default()
-	r.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{"name": "wx"})
-	})
-	r.Run()
+	router := gin.Default()
+
+	// 初始化路由
+	bootstrap.SetupRoute(router)
+
+	// 启动服务
+	err := router.Run(":3000")
+	if err != nil {
+		fmt.Printf("server run fail：%s\n", err.Error())
+		return
+	}
+
 }
