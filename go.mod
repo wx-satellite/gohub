@@ -10,6 +10,7 @@ require (
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/spf13/cast v1.4.1
 	github.com/spf13/viper v1.11.0
+	github.com/thedevsaddam/govalidator v1.9.10 // indirect
 	github.com/ugorji/go v1.2.7 // indirect
 	golang.org/x/sys v0.0.0-20220422013727-9388b58f7150 // indirect
 	gorm.io/driver/mysql v1.3.3 // indirect

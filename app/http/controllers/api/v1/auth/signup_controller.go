@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	v1 "gohub/app/http/controllers/api/v1"
 	"gohub/app/models/user"
+	"gohub/app/requests"
 	"net/http"
 )
 
@@ -15,9 +16,7 @@ type SignupController struct {
 
 // IsPhoneExist 检测手机号是否被注册
 func (c *SignupController) IsPhoneExist(ctx *gin.Context) {
-	var in struct {
-		Phone string `json:"phone"`
-	}
+	var in requests.SignupPhoneExistRequest
 
 	// 解析 json 请求
 	if err := ctx.ShouldBindJSON(&in); err != nil {
@@ -28,5 +27,16 @@ func (c *SignupController) IsPhoneExist(ctx *gin.Context) {
 		fmt.Println(err.Error())
 		return
 	}
+
+	// 表单验证
+	errs := requests.ValidateSignupPhoneExist(&in, ctx)
+	if len(errs) > 0 {
+		// 验证失败，返回 422 状态码和错误信息
+		ctx.AbortWithStatusJSON(http.StatusUnprocessableEntity, gin.H{
+			"errors": errs,
+		})
+		return
+	}
+
 	ctx.JSON(http.StatusOK, gin.H{"exist": user.IsPhoneExist(in.Phone)})
 }
