@@ -19,6 +19,8 @@ func main() {
 	// 初始化 gin
 	router := gin.Default()
 
+	// 初始化DB
+	bootstrap.SetupDB()
 	// 初始化路由
 	bootstrap.SetupRoute(router)
 

@@ -12,4 +12,7 @@ require (
 	github.com/spf13/viper v1.11.0
 	github.com/ugorji/go v1.2.7 // indirect
 	golang.org/x/sys v0.0.0-20220422013727-9388b58f7150 // indirect
+	gorm.io/driver/mysql v1.3.3 // indirect
+	gorm.io/driver/sqlite v1.3.2 // indirect
+	gorm.io/gorm v1.23.4 // indirect
 )
