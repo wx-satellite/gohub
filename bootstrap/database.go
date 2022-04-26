@@ -2,6 +2,7 @@ package bootstrap
 
 import (
 	"fmt"
+	"gohub/app/models/user"
 	"gohub/config"
 	"gohub/pkg/database"
 	"gorm.io/driver/mysql"
@@ -45,4 +46,12 @@ func SetupDB() {
 	database.SQLDB.SetMaxIdleConns(config.GetInt("database.mysql.max_idle_connections"))
 	// 最大连接数
 	database.SQLDB.SetMaxOpenConns(config.GetInt("database.mysql.max_open_connections"))
+
+	// 自动迁移
+	autoMigrate()
+}
+
+// gorm 自带自动迁移，文档地址：https://gorm.io/zh_CN/docs/migration.html
+func autoMigrate() {
+	_ = database.DB.AutoMigrate(new(user.User))
 }
