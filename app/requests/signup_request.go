@@ -57,7 +57,7 @@ type SignupEmailExistRequest struct {
 	Email string `json:"email" valid:"email"`
 }
 
-func ValidateSignupEmailExist(data interface{}, ctx *gin.Context) map[string][]string {
+func ValidateSignupEmailExist(ctx *gin.Context, data interface{}) map[string][]string {
 	rules := govalidator.MapData{
 		// min 和 max 是闭区间
 		"email": []string{"required", "min:4", "max:30", "email"},
